@@ -1,3 +1,7 @@
+/*
+ *  Modifications for Linux environment, ensure include file names
+ *  are case sensitive
+ */
 #include <Arduino.h>
 #include <avr/io.h>
 #include <avr/wdt.h>
