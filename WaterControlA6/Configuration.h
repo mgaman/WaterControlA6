@@ -22,19 +22,19 @@
 
 // 0,1 UART
 // 2,3,4 unused
-const int A6_RESET_TRIGGER = 7;  // hardware reset of modem
-const int ARD_RESET_TRIGGER = 4;  // connect via 2K resistor to RESET
-const int IN1 = 5; // relay pins
-const int IN2 = 6;
-const int RED_LED_PIN = 10;
-const int GREEN_LED_PIN = 11;
-const int BLUE_LED_PIN = 12;
-const int ONBOARD_LED = 13;
+#define A6_RESET_TRIGGER  7 // hardware reset of modem
+#define ARD_RESET_TRIGGER  4  // connect via 2K resistor to RESET
+#define IN1  5 // relay pins
+#define IN2  6
+#define RED_LED_PIN 10
+#define GREEN_LED_PIN  11
+#define BLUE_LED_PIN  12
+#define ONBOARD_LED  13
 // now need to use 20/21 for I2C so move to 18/19
 // couldnt use 2/3 because pins already soldered in and are too short
 // needs to move modem serial from serial1 to serial2
-const int METER_DRDY_1 = 2; // alarm must be an interrupt pin
-const int METER_DRDY_2 = 3; // alarm must be an interrupt pin
+#define METER_DRDY_1 2 // alarm must be an interrupt pin
+#define METER_DRDY_2 3 // alarm must be an interrupt pin
 // water meter observer calibration
 
 // MEGA MISO 50 MOSI 51  SCK 52

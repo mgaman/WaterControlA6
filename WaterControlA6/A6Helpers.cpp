@@ -4,8 +4,8 @@
  *   else the modem may never get  going
  */
 #include <Arduino.h>
-#include "A6Services.h"
-#include "A6Call.h"
+#include <A6Services.h>
+#include <A6Call.h>
 
 #define TRANSISTOR_CONTROL 7  // connect to base of transistor
 #define A6_RESET_TIME 50 // ms

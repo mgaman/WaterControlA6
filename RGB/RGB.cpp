@@ -5,9 +5,9 @@ void setColor(int red, int green, int blue);
 /*
 Adafruit Arduino - Lesson 3. RGB LED
 */
-int redPin = 10;
-int greenPin = 11;
-int bluePin = 12;
+#define redPin  10
+#define greenPin 11
+#define bluePin 12
 //uncomment this line if using a Common Anode LED
 #define COMMON_ANODE
 void setup()
