@@ -32,6 +32,9 @@ Adafruit_SSD1306 display(OLED_RESET);
 #define YPOS 1
 #define DELTAY 2
 
+// Eclipse IDE needs prototypes
+void testscrolltext(void);
+void testdrawchar(void);
 
 #if (SSD1306_LCDHEIGHT != 32)
 #error("Height incorrect, please fix Adafruit_SSD1306.h!");
@@ -54,7 +57,7 @@ void setup()   {
   display.clearDisplay();
 
   // draw the first ~12 characters in the font
-#if 0
+#if 1
   testdrawchar();
   display.display();
   delay(2000);
@@ -65,7 +68,7 @@ void setup()   {
   display.setCursor(0,0);
   display.print("Hello World0123456789");
   display.display();
-#if 0
+#if 1
   display.clearDisplay();
 
   // draw scrolling text
