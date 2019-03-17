@@ -70,14 +70,14 @@ void SMSParse(char * s)
       break;
     case 'C':
       TapChangeState(TAP_CLOSE);
-      sprintf(tempbuf,"%s/RawData.php?AC=tapchange&imei=%s&UT=%lu&tap=1&epoch=%lu&m0=%lu&m1=%lu",EEPROMGetIndex(WWWPATH),
+      sprintf(tempbuf,"%s/RawData.php?AC=tapchange&imei=%s&UT=%lu&tap=tapclose&epoch=%lu&m0=%lu&m1=%lu",EEPROMGetIndex(WWWPATH),
         IMEI,millis()/1000,ep,totalMeterCount[0],totalMeterCount[1]);
   //    Serial.println(tempbuf);
       urlSent = HTTPGET(tempbuf);
       break;
     case 'O':
       TapChangeState(TAP_OPEN);
-      sprintf(tempbuf,"%s/RawData.php?AC=tapchange&imei=%s&UT=%lu&tap=2&epoch=%lu&m0=%lu&m1=%lu",EEPROMGetIndex(WWWPATH),
+      sprintf(tempbuf,"%s/RawData.php?AC=tapchange&imei=%s&UT=%lu&tap=tapopen&epoch=%lu&m0=%lu&m1=%lu",EEPROMGetIndex(WWWPATH),
         IMEI,millis()/1000,ep,totalMeterCount[0],totalMeterCount[1]);
       urlSent = HTTPGET(tempbuf);
       break;
