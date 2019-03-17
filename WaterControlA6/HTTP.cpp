@@ -80,8 +80,8 @@ bool HTTPGET(char *url)
 // stage 0 waiting for LF
 static char linebuf[100];
 static unsigned offset = 0;
-static int stage = 0;
-// scan resonse for HTTP/1.n nnn OK
+//static int stage = 0;
+// scan response for HTTP/1.n nnn OK
 // message may come in several bursts
 static int httpparse(uint8_t c)
 {

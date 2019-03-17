@@ -204,8 +204,7 @@ void loop() {
 	if (urlSent && !client.connected()) {
 		Serial.println();
 		Serial.println(F("Stopping."));
-		wdt_reset();
-		// reset the watchdog
+		wdt_reset(); // reset the watchdog
 		client.stop();
 		urlSent = false;
 	}
@@ -228,7 +227,7 @@ void loop() {
 			RGBActivate(RED_LED, LED_OFF);
 			RGBActivate(BLUE_LED, LED_OFF);
 			RGBActivate(GREEN_LED, LED_ON);
-			smsSent = false;    // dont stop mext leak message
+			smsSent = false;    // dont stop next leak message
 		} else if (wf[0] == FLOWING && wf[1] == FLOWING)  // both report flowing
 				{
 			RGBActivate(RED_LED, LED_OFF);
@@ -254,7 +253,7 @@ void loop() {
 			TapChangeState(TAP_CLOSE);
 			urlSent = HTTPGET(bigbuff);
 			Serial.println(urlSent ? F("leak sent") : F("leak not sent"));
-			wdt_reset();
+			wdt_reset();  // reset the watchdog
 			uint32_t achshav = millis() / 1000;
 			if (!smsSent || achshav > (lastLeakSentSecs + 600)) // send SMS for sustained leak every 10 minutes
 					{
@@ -298,8 +297,7 @@ void loop() {
 		smsArrived = false;
 		SMSParse(phone.smsbuffer);
 	}
-	wdt_reset();
-	// reset the watchdog
+	wdt_reset(); // reset the watchdog
 }
 
 /*
