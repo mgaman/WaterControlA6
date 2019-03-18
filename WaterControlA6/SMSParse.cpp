@@ -70,14 +70,14 @@ void SMSParse(char * s)
       break;
     case 'C':
       TapChangeState(TAP_CLOSE);
-      sprintf(tempbuf,"%s/RawData.php?AC=tapchange&imei=%s&UT=%lu&tap=tapclose&epoch=%lu&m0=%lu&m1=%lu",EEPROMGetIndex(WWWPATH),
+      sprintf(tempbuf,"%s/RawData.php?AC=tapchange&imei=%s&UT=%lu&tap=3&epoch=%lu&m0=%lu&m1=%lu",EEPROMGetIndex(WWWPATH),
         IMEI,millis()/1000,ep,totalMeterCount[0],totalMeterCount[1]);
   //    Serial.println(tempbuf);
       urlSent = HTTPGET(tempbuf);
       break;
     case 'O':
       TapChangeState(TAP_OPEN);
-      sprintf(tempbuf,"%s/RawData.php?AC=tapchange&imei=%s&UT=%lu&tap=tapopen&epoch=%lu&m0=%lu&m1=%lu",EEPROMGetIndex(WWWPATH),
+      sprintf(tempbuf,"%s/RawData.php?AC=tapchange&imei=%s&UT=%lu&tap=2&epoch=%lu&m0=%lu&m1=%lu",EEPROMGetIndex(WWWPATH),
         IMEI,millis()/1000,ep,totalMeterCount[0],totalMeterCount[1]);
       urlSent = HTTPGET(tempbuf);
       break;
@@ -100,8 +100,8 @@ void SMSParse(char * s)
        */
     case 'P':
       // this string about 170 long
-      sprintf(tempbuf,"%s/RawData.php?AC=ping&imei=%s&UT=%lu&m0=%lu&m1=%lu&tap=%s&epoch=%lu&ss=%d",EEPROMGetIndex(WWWPATH),
-        IMEI,millis()/1000,totalMeterCount[0],totalMeterCount[1],TapToText(),ep,rssi);
+      sprintf(tempbuf,"%s/RawData.php?AC=ping&imei=%s&UT=%lu&m0=%lu&m1=%lu&tap=%d&epoch=%lu&ss=%d",EEPROMGetIndex(WWWPATH),
+        IMEI,millis()/1000,totalMeterCount[0],totalMeterCount[1],lasttap,ep,rssi);
  //     Serial.println(tempbuf);
       urlSent = HTTPGET(tempbuf);
       break;

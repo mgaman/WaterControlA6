@@ -104,6 +104,7 @@ void MeterCount2() {
 
 void setup() {
 	struct sU8item dline;
+	bool stillDown = true;
 	//InitEepromData();
 	// set up the various GPIO hardware
 	// LEDS
@@ -135,7 +136,7 @@ void setup() {
 	OCR0A = 0xAF;
 	TIMSK0 |= _BV(OCIE0A);
 	PrintEepromData();
-	gsm.enableDebug = true;
+	gsm.enableDebug = false;
 	displayInit();
 	displayAddLine(0, "Water Control");
 	displayShow();
@@ -172,6 +173,9 @@ void setup() {
 						urlSent ? F("powerup sent") : F("powerup not sent"));
 				if (SMSout)
 					phone.sendSMS(EEPROMGetIndex(DP), "Powerup");
+				if (urlSent)
+					stillDown = false;
+
 			} else
 				Serial.println(F("Couldn't get IP address"));
 		} else
@@ -179,6 +183,8 @@ void setup() {
 	} else
 		Serial.println(F("gsm down"));
 	wdt_enable(WDTO_8S);
+	if (stillDown)  // force restart if not online
+		while (true) {}
 }
 
 uint8_t httpbuff[2000];
@@ -199,7 +205,7 @@ void loop() {
 	if (client.available()) {
 		int k = client.available();
 		client.read(httpbuff, k); // get it all
-		HTTPResponse(httpbuff, k); // now analyse
+		HTTPResponse((uint8_t *)httpbuff, (unsigned)k); // now analyse
 	}
 	if (urlSent && !client.connected()) {
 		Serial.println();
@@ -245,9 +251,9 @@ void loop() {
 			else
 				ep = 0;
 			if (sprintf(bigbuff,
-					"%s/RawData.php?AC=leak&imei=%s&UT=%lu&m0=%lu&m1=%lu&tap=%s&epoch=%lu",
+					"%s/RawData.php?AC=leak&imei=%s&UT=%lu&m0=%lu&m1=%lu&tap=%d&epoch=%lu",
 					EEPROMGetIndex(WWWPATH), IMEI, millis() / 1000,
-					totalMeterCount[0], totalMeterCount[1], TapToText(),
+					totalMeterCount[0], totalMeterCount[1], lasttap,
 					ep) > BIG_BUFF_SIZE)
 				errorprint(__FILE__, __LINE__);
 			TapChangeState(TAP_CLOSE);

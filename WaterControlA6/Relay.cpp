@@ -48,11 +48,13 @@ void TapChangeState(enum tapState t)
   }
 }
 
+#if 0
 const char *tapstatenames[] = {"unknown","tapopen","tapclose"};
 const char *TapToText()
 {
   return tapstatenames[lasttap];
 }
+#endif
 
 
 
