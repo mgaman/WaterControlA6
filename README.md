@@ -20,7 +20,7 @@ An RGB led gives feedback as follows:
 - Another of my projects, A6GPRS, provides a TCP client interface and telephony interface to this device.
 ### SMS
 - The device can act upon a variety of commands received, for example turn faucet on/off, reset all counter, reboot.
-### HTTP
+### HTTP Client
 - The meter is an HTTP client and sents HTTP GET requested to the server.
 ## Parameter Storage
 - All runtime parameters are saved in the Arduino EEPROM. While initialized upon flashing of the program, they can be modified
@@ -30,3 +30,7 @@ via SMS commands.
 -- Report time i.w. how often the HTTP client sends a report, default 600 seconds.
 -- HTTP client address
 -- Pathname of HTTP request at the server
+## HTTP Server
+- My server runs a typical LAMP stack.
+- HTTP GET requests are parsed by a PHP script and then data added to an SQL database.
+- Other PHP scripts are used to display data in web format.
